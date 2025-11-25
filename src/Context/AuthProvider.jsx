@@ -1,26 +1,29 @@
-import React from 'react';
-import { AuthContext } from './AuthContext';
-import { auth } from '@/lib/firebase';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+"use client";
+import React, { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
+import { auth } from "@/lib/firebase";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
+const googleProvider = new GoogleAuthProvider();
 
-const googleProvider = new GoogleAuthProvider()
-const AuthProvider = () => {
+const AuthProvider = ({ children }) => {
+    // ✅ children props যোগ করা হলো
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // email registeration
+    // email registration
     const registerUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
+
     // Email Sign in
     const signInUser = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
 
-    // google Sign In
+    // Google Sign In
     const signInGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
@@ -31,16 +34,16 @@ const AuthProvider = () => {
         setLoading(true);
         return signOut(auth);
     };
+
     // observer
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
         });
-        return () => {
-            unSubscribe();
-        };
+        return () => unSubscribe();
     }, []);
+
     const authInfo = {
         user,
         loading,
@@ -48,14 +51,9 @@ const AuthProvider = () => {
         signInUser,
         signInGoogle,
         logOut,
-        
     };
-    return (
-     <AuthContext.Provider value={authInfo}>
-        {children}
-     </AuthContext.Provider>
 
-    )
+    return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

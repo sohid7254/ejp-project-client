@@ -1,5 +1,9 @@
 import { Urbanist } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/Components/Navbar";
+import AuthProvider from "@/Context/AuthProvider";
+import Footer from "@/Components/Footer";
+
 
 const urbanist = Urbanist({
     subsets: ["latin"],
@@ -14,7 +18,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={`${urbanist.variable}  font-sans`}>{children}</body>
+            <body className={`${urbanist.variable}  font-sans`}>
+                <AuthProvider>
+                    <div className="flex flex-col min-h-screen ">
+                        <Navbar/>
+                        <div className="flex-1">{children}</div>
+                        <Footer/>
+                    </div>
+                </AuthProvider>
+            </body>
         </html>
     );
 }
