@@ -1,17 +1,13 @@
 import BackButton from "@/Components/BackButton";
 
-
 const Page = async ({ params }) => {
     const { id } = await params;
-    
+
     console.log("product id", id);
 
-    const res = await fetch(`http://localhost:4000/product/${id}`);
+    const res = await fetch(`https://ejp-project-server.vercel.app/product/${id}`);
     const product = await res.json();
     console.log("here is details", product);
-
-    
-      
 
     return (
         <div className="max-w-6xl mx-auto p-6 flex flex-col md:flex-row gap-8">

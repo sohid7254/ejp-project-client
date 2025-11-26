@@ -6,12 +6,12 @@ import React, { useEffect, useState } from "react";
 const Page = () => {
     const [products, setProducts] = useState([]);
     const [query, setQuery] = useState("");
-    console.log(products)
-    
+    console.log(products);
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch(`http://localhost:4000/allproducts?search=${query}`);
+                const res = await fetch(`https://ejp-project-server.vercel.app/allproducts?search=${query}`);
                 const data = await res.json();
                 setProducts(data);
             } catch (err) {

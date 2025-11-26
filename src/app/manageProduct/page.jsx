@@ -14,7 +14,7 @@ const ManageProductsPage = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("http://localhost:4000/allproducts");
+                const res = await fetch("https://ejp-project-server.vercel.app/allproducts");
                 const data = await res.json();
                 setProducts(data);
             } catch (err) {
@@ -29,7 +29,7 @@ const ManageProductsPage = () => {
         if (!confirm("Are you sure you want to delete this product?")) return;
 
         try {
-            const res = await fetch(`http://localhost:4000/product/${id}`, {
+            const res = await fetch(`https://ejp-project-server.vercel.app/product/${id}`, {
                 method: "DELETE",
             });
 

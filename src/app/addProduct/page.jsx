@@ -22,7 +22,7 @@ const AddProductForm = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("http://localhost:4000/addProduct", {
+            const res = await fetch("https://ejp-project-server.vercel.app/addProduct", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
