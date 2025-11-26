@@ -27,13 +27,13 @@ const Navbar = () => {
                 </Link>
             </li>
             <li>
-                <Link href="/about" className={pathname === "/about" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
-                    About
+                <Link href="/aboutUs" className={pathname === "/aboutUs" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
+                    About Us
                 </Link>
             </li>
             <li>
-                <Link href="/contact" className={pathname === "/contact" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
-                    Contact
+                <Link href="/contactUs" className={pathname === "/contactUs" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
+                    Contact Us
                 </Link>
             </li>
             <li>
