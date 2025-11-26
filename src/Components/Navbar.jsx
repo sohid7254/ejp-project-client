@@ -1,10 +1,23 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import useAuth from "@/Context/useAuth"; // ✅ Auth context থেকে user ও logOut function আনছি
 
 const Navbar = () => {
     const pathname = usePathname();
+    const { user, logOut } = useAuth(); // ✅ context থেকে user ও logOut function
+    console.log(user)
+    const handleLogout =  () => {
+        logOut()
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err.message)
+          })
+    };
 
     const links = (
         <>
@@ -32,7 +45,6 @@ const Navbar = () => {
                 <div className="navbar">
                     {/* Left: Logo + Mobile Dropdown */}
                     <div className="navbar-start">
-                        {/* Mobile Dropdown */}
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,12 +71,20 @@ const Navbar = () => {
 
                     {/* Right: Action Buttons */}
                     <div className="navbar-end gap-2">
-                        <Link href="/login" className="btn btn-outline btn-primary rounded-full px-4 sm:px-6">
-                            Log In
-                        </Link>
-                        <Link href="/signup" className="btn btn-primary rounded-full px-4 sm:px-6 text-white">
-                            Sign Up
-                        </Link>
+                        {user ? (
+                            <button onClick={handleLogout} className="btn btn-outline btn-error rounded-full px-4 sm:px-6">
+                                Log Out
+                            </button>
+                        ) : (
+                            <>
+                                <Link href="/login" className="btn btn-outline btn-primary rounded-full px-4 sm:px-6">
+                                    Log In
+                                </Link>
+                                <Link href="/register" className="btn btn-primary rounded-full px-4 sm:px-6 text-white">
+                                    Sign Up
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

@@ -1,41 +1,36 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
 import { auth } from "@/lib/firebase";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { AuthContext } from "./AuthContext";
 
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-    // ✅ children props যোগ করা হলো
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // email registration
     const registerUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
 
-    // Email Sign in
     const signInUser = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
 
-    // Google Sign In
     const signInGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     };
 
-    // signOut
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
     };
 
-    // observer
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
