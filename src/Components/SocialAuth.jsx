@@ -2,18 +2,20 @@
 import useAuth from "@/Context/useAuth";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useRouter } from "next/navigation"; // ✅ router import
+import { useRouter, useSearchParams } from "next/navigation"; // ✅ router import
 
 const SocialAuth = () => {
     const { signInGoogle } = useAuth();
     const router = useRouter(); // ✅ router instance
+    const searchParams = useSearchParams()
+    const redirectPath = searchParams.get("redirect") || "/"
 
     const handleGoogleSignIn = () => {
         signInGoogle()
             .then((res) => {
                 console.log("Google user:", res.user);
                 // ✅ login successful হলে home এ redirect
-                router.push("/");
+                router.push(redirectPath);
             })
             .catch((err) => {
                 console.log("Google login error:", err.message);

@@ -8,7 +8,7 @@ import { LiaSwimmerSolid } from "react-icons/lia";
 import { IoMan } from "react-icons/io5";
 import { TbGps } from "react-icons/tb";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import ProductCard from "@/Components/ProductCard";
+
 import Products from "@/Components/Products";
 export default function Home() {
   return (

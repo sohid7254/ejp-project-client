@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // ✅ router import
+import { useRouter, useSearchParams } from "next/navigation"; // ✅ router import
 import useAuth from "@/Context/useAuth";
 import SocialAuth from "@/Components/SocialAuth";
 
@@ -14,6 +14,8 @@ const Page = () => {
     const [loading, setLoading] = useState(false);
 
     const router = useRouter(); // ✅ router instance
+    const searchParams = useSearchParams();
+    const redirectPath = searchParams.get("redirect") || "/"
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,7 +27,7 @@ const Page = () => {
             console.log("Logged in user:", result.user);
 
             // ✅ login successful হলে home এ redirect
-            router.push("/");
+            router.push(redirectPath);
         } catch (err) {
             setError(err.message);
         } finally {

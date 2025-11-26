@@ -8,7 +8,7 @@ import useAuth from "@/Context/useAuth"; // ✅ Auth context থেকে user �
 const Navbar = () => {
     const pathname = usePathname();
     const { user, logOut } = useAuth(); // ✅ context থেকে user ও logOut function
-    console.log(user)
+    
     const handleLogout =  () => {
         logOut()
           .then(res => {
@@ -34,6 +34,16 @@ const Navbar = () => {
             <li>
                 <Link href="/contact" className={pathname === "/contact" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
                     Contact
+                </Link>
+            </li>
+            <li>
+                <Link href="/products" className={pathname === "/products" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
+                    All Products
+                </Link>
+            </li>
+            <li>
+                <Link href="/addProduct" className={pathname === "/addProduct" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
+                    Add Products
                 </Link>
             </li>
         </>

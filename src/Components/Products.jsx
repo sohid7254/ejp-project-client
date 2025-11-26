@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -39,11 +41,18 @@ const Products = () => {
 
                             <div className="flex items-center justify-between mt-auto">
                                 <span className="text-orange-500 font-extrabold text-lg">${product.price}</span>
-                                <button className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition">View Details</button>
+                                <button className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition">
+                                    <Link href={`/products/${product._id}`}>View Details</Link>
+                                </button>
                             </div>
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className="flex justify-end">
+                <Link href={"/products"} className="btn mt-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition flex justify-center items-center">
+                    See More <FaLongArrowAltRight />
+                </Link>
             </div>
         </div>
     );
