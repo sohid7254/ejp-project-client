@@ -46,6 +46,11 @@ const Navbar = () => {
                     Add Products
                 </Link>
             </li>
+            <li>
+                <Link href="/manageProduct" className={pathname === "manageProduct" ? "underline text-gray-600 px-4 py-1 font-bold" : "text-gray-700 px-4 py-1 font-bold"}>
+                    Manage Product
+                </Link>
+            </li>
         </>
     );
 
