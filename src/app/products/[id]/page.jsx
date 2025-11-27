@@ -1,13 +1,13 @@
 import BackButton from "@/Components/BackButton";
+import BuyButton from "@/Components/BuyButton";
+
 
 const Page = async ({ params }) => {
     const { id } = await params;
-
-    console.log("product id", id);
-
     const res = await fetch(`https://ejp-project-server.vercel.app/product/${id}`);
     const product = await res.json();
-    console.log("here is details", product);
+    
+    
 
     return (
         <div className="max-w-6xl mx-auto p-6 flex flex-col md:flex-row gap-8">
@@ -36,7 +36,10 @@ const Page = async ({ params }) => {
                 </div>
 
                 {/* Back Button */}
-                <BackButton />
+                <div className="flex gap-4">
+                    <BackButton />
+                    <BuyButton product={product}/>
+                </div>
             </div>
         </div>
     );

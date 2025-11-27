@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useAuth from "@/Context/useAuth";
@@ -71,9 +71,10 @@ const Page = () => {
                     </Link>
                 </p>
                 <div className="mt-4">
-                    <SocialAuth />
+                    <Suspense fallback={<div>Loading social auth...</div>}>
+                        <SocialAuth />
+                    </Suspense>
                 </div>
-                
             </div>
         </div>
     );

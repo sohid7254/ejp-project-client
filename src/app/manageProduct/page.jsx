@@ -14,7 +14,7 @@ const ManageProductsPage = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("https://ejp-project-server.vercel.app/allproducts");
+                const res = await fetch("https://ejp-project-server.vercel.app/buy");
                 const data = await res.json();
                 setProducts(data);
             } catch (err) {
@@ -29,7 +29,7 @@ const ManageProductsPage = () => {
         if (!confirm("Are you sure you want to delete this product?")) return;
 
         try {
-            const res = await fetch(`https://ejp-project-server.vercel.app/product/${id}`, {
+            const res = await fetch(`https://ejp-project-server.vercel.app/buy/${id}`, {
                 method: "DELETE",
             });
 
@@ -48,7 +48,7 @@ const ManageProductsPage = () => {
     return (
         <ProtectedPage>
             <div className="max-w-6xl mx-auto p-6">
-                <h2 className="text-2xl font-bold mb-6">Manage Products</h2>
+                <h2 className="text-2xl font-bold mb-6">Manage Products({products.length})</h2>
 
                 {/* ✅ Desktop Table */}
                 <div className="hidden md:block overflow-x-auto">
@@ -70,9 +70,7 @@ const ManageProductsPage = () => {
                                     <td className="px-4 py-2">{product.date || "N/A"}</td>
                                     <td className="px-4 py-2">{product.priority || "Normal"}</td>
                                     <td className="px-4 py-2 text-center space-x-2">
-                                        <Link href={`/products/${product._id}`} className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                                            View
-                                        </Link>
+                                        <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">View</button>
                                         <button onClick={() => handleDelete(product._id)} className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
                                             Delete
                                         </button>
@@ -92,9 +90,7 @@ const ManageProductsPage = () => {
                             <p className="text-gray-600 mb-1">📅 Date: {product.date || "N/A"}</p>
                             <p className="text-gray-600 mb-3">⚡ Priority: {product.priority || "Normal"}</p>
                             <div className="flex gap-2">
-                                <Link href={`/products/${product._id}`} className="flex-1 text-center px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                                    View
-                                </Link>
+                                <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">View</button>
                                 <button onClick={() => handleDelete(product._id)} className="flex-1 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
                                     Delete
                                 </button>
