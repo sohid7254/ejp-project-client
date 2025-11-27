@@ -4,17 +4,19 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import ProtectedPage from "@/Hooks/ProtectedPage";
-import Link from "next/link";
+import useAuth from "@/Context/useAuth";
+
 
 const ManageProductsPage = () => {
     const [products, setProducts] = useState([]);
     const router = useRouter();
+    const {user} = useAuth()
 
     // ✅ Fetch products from backend
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("https://ejp-project-server.vercel.app/buy");
+                const res = await fetch(`https://ejp-project-server.vercel.app/buy?email=${user.email}`);
                 const data = await res.json();
                 setProducts(data);
             } catch (err) {
@@ -29,7 +31,7 @@ const ManageProductsPage = () => {
         if (!confirm("Are you sure you want to delete this product?")) return;
 
         try {
-            const res = await fetch(`https://ejp-project-server.vercel.app/buy/${id}`, {
+            const res = await fetch(`https://ejp-project-server.vercel.app/buy/${id}?email=${user.email}`, {
                 method: "DELETE",
             });
 

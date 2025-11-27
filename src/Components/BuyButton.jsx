@@ -1,8 +1,10 @@
 "use client";
+import useAuth from "@/Context/useAuth";
 import React from "react";
 import Swal from "sweetalert2";
 
 const BuyButton = ({product}) => {
+    const {user} = useAuth()
     const handleBuy = async () => {
         console.log("button clicked")
         const res = await fetch("https://ejp-project-server.vercel.app/buy", {
@@ -13,6 +15,7 @@ const BuyButton = ({product}) => {
             body: JSON.stringify({
                 title: product.title,
                 price: product.price,
+                email: user.email,
             }),
         });
 
